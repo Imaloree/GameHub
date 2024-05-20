@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="gallery.css">
+        <title>GameHub Gallery</title>
+        <link rel="icon" href="HubLogo/Game hub logo.png" type="image/png">
+    </head>
+    <body>
+        <header>
+            <div class="banner"></div>
+        </header>
+        <ul class="navbar">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="#" class="active">Gallery</a></li>
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="game.html">Game</a></li>
+            <li><a id="second-website" href="https://imaloree.github.io/SynthTech/HTML/index.html">Go to Second Website</a></li>
+        </ul>
+
+        <input type="search" id="search" placeholder="Search">
+
+        <main>
+        <h2 class="section-title">Gallery</h2>
+        <div class="gallery-images">
+            <!-- Add more image containers as needed, each with its own main and preview images -->
+            <div class="image-container">
+                <img src="arena breakout\preview ab1.jpeg" alt="Arena Breakout1" class="main-image">
+                <div class="preview-images">
+                    <img src="arena breakout\preview ab1.jpeg" alt="Arena Breakout.1">
+                    <img src="arena breakout\Arena-Breakout-.jpeg" alt="Arena Breakout.2">
+                    <img src="arena breakout\preview ab2.jpeg" alt="Arena Breakout.3">
+                    <img src="arena breakout\preview ab3.jpeg" alt="Arena Breakout.4">
+                </div>
+            </div>
+
+            <div class="image-container">
+                <img src="MONSTER HUNTER ICEBORNE\MAIN.jpeg" alt="Monster Hunter: Iceborne-1" class="main-image">
+                <div class="preview-images">
+                    <img src="MONSTER HUNTER ICEBORNE\MAIN.jpeg" alt="Monster Hunter: Iceborne.1" >
+                    <img src="MONSTER HUNTER ICEBORNE\PREVIEW MHW2.jpg" alt="Monster Hunter: Iceborne.2">
+                    <img src="MONSTER HUNTER ICEBORNE\PREVIEW MHW.jpeg" alt="Monster Hunter: Iceborne.3">
+                    <img src="MONSTER HUNTER ICEBORNE\Tigrex1.0.jpeg" alt="Monster Hunter: Iceborne.4">
+                </div>
+            </div>
+
+            <div class="image-container">
+                <img src="spider-man 2\Spider-Man-2.png" alt="Spider Man 2 Game1" class="main-image">
+                <div class="preview-images">
+                    <img src="spider-man 2\Spider-Man-2.png" alt="Spider Man 2 Game-1">
+                    <img src="spider-man 2\preview 1.jpeg" alt="Spider Man 2 Game-2">
+                    <img src="spider-man 2\preview 2.jpeg" alt="Spider Man 2 Game-3">
+                    <img src="spider-man 2\preview 3.webp" alt="Spider Man 2 Game-4">
+                </div>
+            </div>
+        
+            <!-- Add more image containers as needed, each with its own main and preview images -->
+        </div>
+        </main>
+
+    <script>
+        // Function to handle the click event on each preview image
+        function selectImage(event) {
+            // Get a reference to the selected image container
+            const selectedImageContainer = event.target.closest(".image-container");
+    
+            // If a selected image container is found, proceed
+            if (selectedImageContainer) {
+                // Get a reference to the selected image within the selected image container
+                const selectedImage = selectedImageContainer.querySelector(".main-image");
+    
+                // Set the source of the selected image to the clicked preview image
+                selectedImage.src = event.target.src;
+            }
+        }
+    
+        // Add a click event listener to each preview image
+        document.querySelectorAll(".preview-images img").forEach(previewImage => {
+            previewImage.addEventListener("click", selectImage);
+        });
+    </script>
+
+        <footer>
+            <p>&copy; 2023 GameHub. All rights reserved.</p>
+        </footer>
+    </body>
+</html>

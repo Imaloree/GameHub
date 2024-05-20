@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="game.css">
+        <title>GameHub Game</title>
+        <link rel="icon" href="HubLogo/Game hub logo.png" type="image/png">
+    </head>
+    <body>
+        <header>
+            <div class="banner"></div>
+        </header>
+        <ul class="navbar">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="#" class="active">Game</a></li>
+            <li><a id="second-website" href="https://imaloree.github.io/SynthTech/HTML/index.html">Go to Second Website</a></li>
+        </ul>
+        <input type="search" id="search" placeholder="Search">
+        <main>
+            <h2 class="section-title">Clicker Game</h2>
+        </main>
+            <main class="glass">
+                <div id="gameArea">
+                    <div id="score">Score: 0</div>
+                    <button id="startButton">Start</button>
+                    <button id="clickButton" disabled>Click Me Fast!</button>
+                    <div id="timer">Time: 10</div>
+                    <p id="instructions">Instructions: Click the "Start Game" button to begin. Then, click the "Click Me!" button as many times as possible within 10 seconds. Your final score will be displayed at the end.</p>
+                    <div id="powerMessage"></div>
+                </div>
+            </main>
+            <br>
+            <main>
+                <div id="leaderboard"></div>
+            </main>
+
+        <footer>
+            <p>&copy; 2023 GameHub. All rights reserved.</p>
+        </footer>
+
+        <script>
+            const scoreElement = document.getElementById('score');
+            const clickButton = document.getElementById('clickButton');
+            const startButton = document.getElementById('startButton');
+            const timerElement = document.getElementById('timer');
+            const instructionsElement = document.getElementById('instructions');
+            const powerMessageElement = document.getElementById('powerMessage');
+            const leaderboardElement = document.getElementById('leaderboard');
+        
+            let score = 0;
+            let timeLeft = 10;
+            let gameRunning = false;
+            let playerName = '';
+            const leaderboard = [];
+        
+            startButton.addEventListener('click', startGame);
+            clickButton.addEventListener('click', increaseScore);
+        
+            function startGame() {
+            score = 0;
+            timeLeft = 10;
+            gameRunning = true;
+            clickButton.disabled = false;
+            startButton.disabled = true;
+            playerName = ''; // Reset player name
+            updateScore();
+            updateTimer();
+            instructionsElement.textContent = 'Game in progress. Keep clicking!';
+            }
+        
+            function updateScore() {
+                scoreElement.textContent = 'Score: ' + score;
+        
+            // Check for special messages based on the score
+            if (score >= 100) {
+                powerMessageElement.textContent = 'POWER CLICKER! FASTER!';
+            } else if (score >= 90) {
+                powerMessageElement.textContent = 'Hey, are you having a seizure?!';
+            } else if (score >= 80) {
+                powerMessageElement.textContent = 'You got skills!';
+            } else if (score >= 70) {
+                powerMessageElement.textContent = 'Incredible!';
+            } else if (score >= 60) {
+                powerMessageElement.textContent = 'Amazing!';
+            } else if (score >= 50) {
+                powerMessageElement.textContent = 'Nice!';
+            } else if (score >= 40) {
+                powerMessageElement.textContent = 'Keep going!';
+            } else {
+                powerMessageElement.textContent = 'You can do it faster!';
+            }
+        }
+        
+        function updateTimer() {
+            if (timeLeft > 0 && gameRunning) {
+                timeLeft--;
+                timerElement.textContent = 'Time: ' + timeLeft;
+                setTimeout(updateTimer, 1000);
+                } else {
+                endGame();
+            }
+        }
+        
+            function increaseScore() {
+            if (gameRunning) {
+            score++;
+            updateScore();
+            }
+        }
+        
+            function endGame() {
+            clickButton.disabled = true;
+            startButton.disabled = false;
+            gameRunning = false;
+            instructionsElement.textContent = 'Game Over! Your final score is ' + score;
+        
+            // Prompt for the player's name for the leaderboard
+            playerName = prompt('Enter your name for the leaderboard:');
+            if (playerName) {
+            leaderboard.push({ name: playerName, score: score });
+            // Sort the leaderboard in descending order based on scores
+            leaderboard.sort((a, b) => b.score - a.score);
+            displayLeaderboard();
+            } else {
+            leaderboardElement.textContent = ''; // Clear leaderboard if no name entered
+            }
+        }
+        
+            function displayLeaderboard() {
+            // Display the leaderboard with all players' names and scores
+            leaderboardElement.innerHTML = '<h3>Leaderboard:</h3>';
+            leaderboard.forEach((entry, index) => {
+            leaderboardElement.innerHTML += `<p>${index + 1}. ${entry.name}: ${entry.score}</p>`;
+            });
+        }
+    </script>
+    </body>
+</html>
